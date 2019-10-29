@@ -1,0 +1,4 @@
+<design:component label="Custom Calendar">
+	<design:attribute name="object" label="Name of SObject" default="Event" description="Name of SObject for which calender to be displayed" />
+    <design:attribute name="currentView" label="Default Calendar View" default="monthlyView" dataSource="monthlyView,weeklyView,dailyView" description="Set Default Calendar View" />
+</design:component>

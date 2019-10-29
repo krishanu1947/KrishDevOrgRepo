@@ -1,0 +1,152 @@
+<!--
+ * Author		: Sachin Chavan
+ * Description	: Custom Calendar for Lightning Experience.
+ * Date			: April 2017
+ *
+-->
+<aura:component controller="CustomCalendarController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+	<ltng:require scripts="{!join(',', $Resource.MomentJS)}" afterScriptsLoaded="{!c.afterScriptsLoaded}" />
+    
+    <aura:attribute name="object" type="String" default="Event" required="true" />
+    <aura:attribute name="calendarViewList" type="List" default="[]" />
+    <aura:attribute name="calendarView" type="Object" />
+    <aura:attribute name="currentView" type="String" default="monthlyView" />
+    <aura:attribute name="selectedDate" type="Date" />
+    <aura:attribute name="showSpinner" type="Boolean" default="false" />
+
+    <div>
+        <div class="forceCalendar">
+            <div class="calendarHeader" >
+                <div class="slds-page-header" role="banner">
+                    <div class="slds-grid">
+                        <div class="slds-col slds-has-flexi-truncate">
+                            <div class="slds-media slds-no-space slds-grow">
+                                <div class="slds-media__figure">
+                                    <lightning:icon iconName="standard:event" />
+                                </div>
+                                <div class="slds-media__body">
+                                    <p class="slds-text-title--caps slds-line-height--reset">Calendar</p>
+                                    <h1 class="slds-page-header__title slds-m-right--small slds-align-middle slds-truncate">{!v.calendarView.label}</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-no-flex slds-grid slds-align-top calendar-controls">
+                            <lightning:buttonGroup >
+                                <lightning:buttonIcon iconName="utility:chevronleft" variant="border" alternativeText="Previous" onclick="{!c.onPrevClick}" />
+                                <lightning:buttonIcon iconName="utility:chevronright" variant="border" alternativeText="Next" onclick="{!c.onNextClick}" />
+                            </lightning:buttonGroup>
+                            <lightning:button class="today-button" label="Today" onclick="{!c.onTodayClick}" disabled="{!v.calendarView.isCurrentWeek}" />
+                            <div class="spacer slds-m-left--large"></div>
+                            <lightning:buttonMenu class="slds-m-horizontal--x-small" iconName="utility:event" menuAlignment="right" alternativeText="Toggle View" onselect="{!c.handleMenuSelect}">
+                                <aura:iteration items="{!v.calendarViewList}" var="view">
+                                    <lightning:menuItem label="{!view.label}" value="{!view.value}" checked="{!view.selected}" />
+                                </aura:iteration>
+                            </lightning:buttonMenu>
+                            <lightning:buttonIcon iconName="utility:add" variant="border" size="large" onclick="{!c.onCreateNewRecordClick}" alternativeText="Add New Record" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <aura:if isTrue="{!equals(v.currentView, 'dailyView')}">
+                <div class="calendar slds-is-relative">
+                    <lightning:spinner class="{!if(v.showSpinner, 'slds-show', 'slds-hide')}" size="medium" variant="brand" />
+                    <div class="calendarTop bumpForScrollBar">
+                        <div class="calendarUserTimezoneOffset">
+                            <strong class="calendarUserTimezoneOffsetText">
+                                <time>GMT −7</time>
+                            </strong>
+                        </div>
+                        <div class="calendarDayHeaders">
+                            <strong class="calendarDayHeader presentDay" aria-hidden="true">{!v.calendarView.calendarDayHeaders[0]}</strong>
+                        </div>
+                        <h3 class="assistiveText">All-Day Events</h3>
+                        <div class="calendarTrough" style="height: 24px;">
+                            <ul class="calendarTroughContainer day"></ul>
+                        </div>
+                    </div>
+                    <div class="calendarRow">
+                        <div class="calendarKey" aria-hidden="true">
+                            <aura:iteration items="12am, 1am, 2am, 3am, 4am, 5am, 6am, 7am, 8am, 9am, 10am, 11am, 12pm, 1pm, 2pm, 3pm, 4pm, 5pm, 6pm, 7pm, 8pm, 9pm, 10pm, 11pm" var="time">
+                                <strong>
+                                    <span>{!time}</span>
+                                </strong>
+                            </aura:iteration>
+                        </div>
+                        <div class="calendarDay presentDay pastDay " style="flex-basis:100%; -webkit-flex-basis:100%;">
+                            <h3 class="assistiveText" tabindex="-1">Friday, April 21</h3>
+                            <div class="eventList"></div>
+                        </div>
+                    </div>
+                </div>
+            </aura:if>
+            
+            <aura:if isTrue="{!equals(v.currentView, 'weeklyView')}">
+                <div class="calendar slds-is-relative">
+                    <lightning:spinner class="{!if(v.showSpinner, 'slds-show', 'slds-hide')}" size="medium" variant="brand" />
+                    <div class="calendarTop bumpForScrollBar">
+                        <div class="calendarUserTimezoneOffset">
+                            <strong class="calendarUserTimezoneOffsetText">
+                                <time>GMT −7</time>
+                            </strong>
+                        </div>
+                        <div class="calendarDayHeaders">
+                            <aura:iteration items="{!v.calendarView.calendarDayHeaders}" var="calendarDayHeader">
+                                <strong class="calendarDayHeader" aria-hidden="true">{!calendarDayHeader}</strong>
+                            </aura:iteration>
+                        </div>
+                        <h3 class="assistiveText">All-Day Events</h3>
+                        <div class="calendarTrough" style="height: 24px;">
+                            <ul class="calendarTroughContainer week"></ul>
+                        </div>
+                    </div>
+                    <div class="calendarRow">
+                        <div class="calendarKey" aria-hidden="true">
+                            <aura:iteration items="12 AM, 01 AM, 02 AM, 03 AM, 04 AM, 05 AM, 06 AM, 07 AM, 08 AM, 09 AM, 10 AM, 11 AM, 12 PM, 01 PM, 02 PM, 03 PM, 04 PM, 05 PM, 06 PM, 07 PM, 08 PM, 09 PM, 10 PM, 11 PM" var="time">
+                                <strong>
+                                    <span>{!time}</span>
+                                </strong>
+                            </aura:iteration>
+                        </div>
+                        
+                        <aura:iteration items="{!v.calendarView.weeks[0].days}" var="calendarDay">
+                            <div class="{! 'calendarDay' + calendarDay.styleClass}" style="flex-basis:14.285714285714286%; -webkit-flex-basis:14.285714285714286%;">
+                                <h3 class="assistiveText" tabindex="-1">{!calendarDay.assistiveText}</h3>
+                                <div class="eventList"></div>
+                            </div>
+                        </aura:iteration>
+                    </div>
+                </div>
+            </aura:if>
+            
+            <aura:if isTrue="{!equals(v.currentView, 'monthlyView')}">
+                <div class="calendar slds-is-relative">
+                    <lightning:spinner class="{!if(v.showSpinner, 'slds-show', 'slds-hide')}" size="medium" variant="brand" />
+                    <div class="calendarTop bumpForScrollBar">
+                        <div class="calendarMonthDayHeaders calendarDayHeaders">
+                            <aura:iteration items="{!v.calendarView.calendarDayHeaders}" var="calendarDayHeader">
+                                <strong class="calendarDayHeader" aria-hidden="true">{!calendarDayHeader}</strong>
+                            </aura:iteration>
+                        </div>
+                    </div>
+                    
+                    <div class="forceCalendarMonthView">
+                        <aura:iteration items="{!v.calendarView.weeks}" var="calendarWeek">
+                            <div class="calendarWeek forceCalendarMonthWeek" style="height:16.666666666666668%;min-height:100px">
+                                <h3 class="assistiveText">{!calendarWeek.label}</h3>
+                                <div class="calendarWeekBackground">
+                                    <aura:iteration items="{!calendarWeek.days}" var="calendarDay">
+                                        <div aura:id="CalendarDay"  class="{!'calendarWeekDay' + calendarDay.styleClass}" onclick="{!c.onCalendarDayClick}" ondblclick="{!c.onCalendarDayDblClick}">
+                                            <div class="dayHeader" aria-hidden="true">{!calendarDay.day}</div>
+                                        </div>
+                                    </aura:iteration>
+                                </div>
+                            </div>
+                        </aura:iteration>
+                    </div>
+                </div>
+            </aura:if>
+        </div>
+    </div>
+    
+</aura:component>

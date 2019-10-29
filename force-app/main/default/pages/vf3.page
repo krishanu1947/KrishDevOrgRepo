@@ -1,0 +1,6 @@
+<apex:page controller="CalloutController" >
+  <!-- Begin Default Content REMOVE THIS -->
+  <h1>Congratulations</h1>
+  
+  {!retString}
+</apex:page>

@@ -1,0 +1,594 @@
+.THIS .forceCalendar {
+    background-color: rgb(255, 255, 255)
+}
+.THIS .forceCalendar,
+.THIS .forceCalendar .calendar,
+.THIS .forceCalendar .calendarView {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0
+}
+.THIS .forceCalendar .calendarHeader,
+.THIS .forceCalendar .calendarSidebar,
+.THIS .forceCalendar .calendarTop {
+    position: relative;
+    z-index: 2
+}
+.THIS .forceCalendar>.calendarSidebar {
+    width: 304px;
+    z-index: 0;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    top: 70px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column
+}
+.THIS .forceCalendar .calendar {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    top: 70px;
+    z-index: 1
+}
+.THIS .forceCalendar .calendarView {
+    top: 40px;
+    right: 0;
+    border-top: 1px solid rgb(216, 221, 230)
+}
+.THIS .forceCalendar .calendarRow,
+.THIS .forceCalendar .calendarDayHeaders,
+.THIS .forceCalendar .calendar {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex
+}
+.THIS .forceCalendar .calendarRow,
+.THIS .forceCalendar .calendarDayHeaders,
+.THIS .forceCalendar .calendarTrough {
+    border-right: 1px solid rgb(216, 221, 230)
+}
+.THIS .forceCalendar .calendarUserTimezoneOffset {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    text-align: center;
+    z-index: 2
+}
+.THIS .forceCalendar .calendarUserTimezoneOffsetText {
+    line-height: 40px;
+    font-weight: 400;
+    color: rgb(84, 105, 141);
+    font-size: 11px
+}
+.THIS .forceCalendar .calendarRow {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    overflow-y: scroll
+}
+.THIS .forceCalendar .calendarKey {
+    min-width: 80px;
+    max-width: 80px;
+    text-align: center
+}
+.THIS .forceCalendar .calendarKey span {
+    position: relative;
+    top: -20px;
+    padding: 6px;
+    background: #fff
+}
+.THIS .forceCalendar .calendarKey strong {
+    display: block;
+    height: 4.16666666%;
+    border-top: 1px solid rgb(216, 221, 230);
+    padding: 10px 0 0 0;
+    font-size: .8125rem;
+    color: rgb(84, 105, 141);
+    font-weight: normal
+}
+.THIS .forceCalendar .calendarKey {
+    box-sizing: content-box;
+    border-bottom: 1px solid rgb(216, 221, 230)
+}
+.THIS .forceCalendar .calendarDay,
+.THIS .forceCalendar .calendarDayHeader,
+.THIS .forceCalendar .calendarTrough {
+    -webkit-flex-basis: 100%;
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%
+}
+.THIS .forceCalendar .calendarDay {
+    position: relative
+}
+.THIS .forceCalendar .calendarDay.presentDay {
+    background: #fafafb
+}
+.THIS .forceCalendar .calendarTop {
+    -webkit-flex-shrink: 0;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    padding-top: 40px;
+    background: rgba(255, 255, 255, .95)
+}
+.THIS .forceCalendar .calendarDayHeaders {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1
+}
+.THIS .forceCalendar .calendarDayHeaders,
+.THIS .forceCalendar .calendarTrough {
+    padding: 0 0 0 80px
+}
+.THIS .forceCalendar .bumpForScrollBar .calendarDayHeaders,
+.THIS .forceCalendar .bumpForScrollBar .calendarTrough {
+    padding-right: 15px
+}
+@media screen and (-ms-high-contrast: active),
+(-ms-high-contrast: none) {
+    .THIS .forceCalendar .bumpForScrollBar .calendarDayHeaders,
+    .THIS .forceCalendar .bumpForScrollBar .calendarTrough {
+        padding-right: 17px
+    }
+}
+@supports (-ms-accelerator: true) {
+    .THIS .forceCalendar .bumpForScrollBar .calendarDayHeaders,
+    .THIS .forceCalendar .bumpForScrollBar .calendarTrough {
+        padding-right: 12px!important
+    }
+}
+.THIS .forceCalendar .calendarTrough {
+    position: relative;
+    width: 100%;
+    min-height: 20px;
+    max-height: 100px;
+    margin: 0;
+    margin-bottom: -1px;
+    border: 1px solid rgb(216, 221, 230);
+    border-bottom-width: 2px;
+    border-right: none;
+    border-left: none;
+    padding-top: 2px;
+    padding-bottom: 10px;
+    z-index: 2;
+    overflow: hidden;
+    -webkit-transition: 300ms ease-in-out;
+    transition: 300ms ease-in-out
+}
+.THIS .forceCalendar .calendarTrough.expanded {
+    max-height: 100vh;
+    overflow-y: auto
+}
+.THIS .forceCalendar .troughToggle {
+    display: table;
+    height: 17px;
+    position: absolute;
+    bottom: -7px;
+    left: 50%;
+    z-index: 3;
+    border: 1px solid rgb(216, 221, 230);
+    border-radius: .5rem;
+    padding: 0 1rem;
+    background: rgb(255, 255, 255);
+    color: rgb(0, 112, 210);
+    line-height: 11px;
+    font-size: 12px;
+    text-decoration: none
+}
+.THIS .forceCalendar .troughToggle>.forceIcon {
+    display: table-cell
+}
+.THIS .forceCalendar .calendarTrough .allDayEvent {
+    display: block;
+    position: absolute;
+    height: 29px;
+    padding: 0 1px
+}
+.THIS .forceCalendar .calendarDayHeader {
+    position: relative;
+    line-height: 40px;
+    vertical-align: middle;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: normal
+}
+.THIS .forceCalendar .calendarDayHeader:after {
+    content: '';
+    position: absolute;
+    border-left: 1px solid rgb(216, 221, 230);
+    top: 40px;
+    bottom: 0;
+    left: 0
+}
+.THIS .forceCalendar .calendarDayHeader.presentDay {
+    color: rgb(0, 112, 210)
+}
+.THIS .forceCalendar .eventList {
+    position: relative;
+    box-sizing: content-box;
+    border-left: 1px solid rgb(216, 221, 230);
+    border-bottom: 1px solid rgb(216, 221, 230);
+    background: -webkit-linear-gradient(rgba(0, 0, 0, .1) 1px, transparent 1.01px);
+    background: linear-gradient(rgba(0, 0, 0, .1) 1px, transparent 1.01px);
+    background-size: 100% 2.08333333%
+}
+.THIS .forceCalendar .eventList:before {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    background: -webkit-linear-gradient(t(colorBorderInput) 1.25px, transparent 1.26px);
+    background: linear-gradient(t(colorBorderInput) 1.25px, transparent 1.26px);
+    background-size: 100% 4.16666666%
+}
+.THIS .forceCalendar .eventListContainer {
+    width: 95%;
+    height: 100%;
+    position: relative;
+    margin-top: 0
+}
+.THIS .forceCalendar .calendarEvent,
+.THIS .forceCalendar .currentTimeMarker {
+    position: absolute;
+    left: 0;
+    right: 0;
+    list-style-type: none
+}
+.THIS .forceCalendar .eventList .calendarEvent {
+    padding: 1px 0 0;
+    overflow: hidden
+}
+.THIS .forceCalendar .allDayEvent {
+    position: relative
+}
+.THIS .forceCalendar .allDayEvent:last-child {
+    margin-bottom: 1px
+}
+.THIS .forceCalendar .currentTimeMarker {
+    z-index: 10;
+    border: 1px solid rgb(234, 130, 136)
+}
+.THIS .forceCalendar .calendarTroughContainer {
+    position: inherit;
+    margin-top: 0;
+    padding-left: 0
+}
+.THIS .forceCalendar .eventBox,
+.THIS .forceCalendar .startsBeforeRange .eventBox:before,
+.THIS .forceCalendar .endsAfterRange .eventBox:after {
+    display: block;
+    margin-top: 1px;
+    height: 100%;
+    background: inherit;
+    font-size: .75rem;
+    color: rgb(22, 50, 92)
+}
+.THIS .forceCalendar .startsBeforeRange .eventBox {
+    margin-left: 3px
+}
+.THIS .forceCalendar .eventBox {
+    border: 1px solid #fff;
+    -webkit-transition: all .5s;
+    transition: all .5s;
+    z-index: 1;
+    position: relative;
+    height: 100%;
+    max-height: 100%
+}
+.THIS .forceCalendar .eventBox:hover,
+.THIS .forceCalendar .eventBox:focus {
+    text-decoration: none;
+    z-index: 2
+}
+.THIS .forceCalendar .previewReferenceElement {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    z-index: 0
+}
+.THIS .forceCalendar .recurringIcon {
+    margin-right: 3px
+}
+.THIS .forceCalendar .calendarEvent.zoom {
+    z-index: 100;
+    overflow: visible
+}
+.THIS .forceCalendar .calendarEvent.zoom .eventBox {
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.16);
+    height: auto;
+    max-height: 50vh;
+    overflow: hidden;
+    -webkit-transition: all 1s;
+    transition: all 1s
+}
+.THIS .forceCalendar .calendarEvent.zoom .eventData.eventDescription {
+    display: block
+}
+.THIS .forceCalendar .zoomW .eventBox,
+.THIS .forceCalendar .zoomN .eventBox {
+    position: absolute
+}
+.THIS .forceCalendar .zoomW .eventBox {
+    right: 0
+}
+.THIS .forceCalendar .zoomN .eventBox {
+    bottom: 0
+}
+.THIS .forceCalendar .eventList {
+    margin: 0;
+    padding: 0
+}
+.THIS .forceCalendar .eventDefinitionList.allDayEvent {
+    padding: 5px;
+    white-space: nowrap;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+.THIS .forceCalendar .eventDefinitionList {
+    padding: 5px 8px;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    white-space: nowrap
+}
+.THIS .forceCalendar .eventData {
+    display: inline;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+.THIS .forceCalendar .allDayEvent .eventDescription a {
+    white-space: nowrap
+}
+.THIS .forceCalendar .eventTime {
+    font-weight: 700;
+    padding-right: .5rem;
+    text-overflow: initial
+}
+.THIS .forceCalendar .calendarEvent.endsAfterRange {
+    padding-right: 14px
+}
+.THIS .forceCalendar .calendarEvent.startsBeforeRange .eventBox:before,
+.THIS .forceCalendar .calendarEvent.endsAfterRange .eventBox:after {
+    content: '';
+    width: 20.5060966544px;
+    height: 20.5060966544px;
+    position: absolute;
+    top: 10%;
+    left: -10px;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    border: 1.2px solid #fff;
+    border-radius: 0 30px 0 0;
+    border-top: none;
+    border-right: none
+}
+.THIS .forceCalendar .calendarEvent.endsAfterRange .eventBox:after {
+    left: auto;
+    right: -10px;
+    -webkit-transform: rotate(-135deg);
+    -ms-transform: rotate(-135deg);
+    transform: rotate(-135deg)
+}
+.THIS .forceCalendar .calendarEvent .eventDescription a:focus {
+    outline: none
+}
+.THIS .forceCalendar .calendarEvent .eventDescription a,
+.THIS .forceCalendar .calendarEvent .eventDescription a:link,
+.THIS .forceCalendar .calendarEvent .eventDescription a:visited,
+.THIS .forceCalendar .calendarEvent .eventDescription a:hover,
+.THIS .forceCalendar .calendarEvent .eventDescription a:focus,
+.THIS .forceCalendar .calendarEvent span.eventData,
+.THIS .forceCalendar .calendarEvent time.eventTime {
+    color: rgb(0, 57, 107)
+}
+.THIS .forceCalendar .calendarEvent.pastEvent .eventDescription a,
+.THIS .forceCalendar .calendarEvent.pastEvent .eventDescription a:link,
+.THIS .forceCalendar .calendarEvent.pastEvent .eventDescription a:visited,
+.THIS .forceCalendar .calendarEvent.pastEvent .eventDescription a:hover,
+.THIS .forceCalendar .calendarEvent.pastEvent .eventDescription a:focus,
+.THIS .forceCalendar .calendarEvent.pastEvent span.eventData,
+.THIS .forceCalendar .calendarEvent.pastEvent time.eventTime {
+    opacity: .7
+}
+.THIS .forceCalendar .calendarEvent .eventBox.light,
+.THIS .forceCalendar .calendarEvent .eventBox.light .eventDescription a,
+.THIS .forceCalendar .calendarEvent .eventBox.light .eventDescription a:link,
+.THIS .forceCalendar .calendarEvent .eventBox.light .eventDescription a:visited,
+.THIS .forceCalendar .calendarEvent .eventBox.light .eventDescription a:hover,
+.THIS .forceCalendar .calendarEvent .eventBox.light .eventDescription a:focus,
+.THIS .forceCalendar .calendarEvent .eventBox.light span.eventData,
+.THIS .forceCalendar .calendarEvent .eventBox.light time.eventTime {
+    color: #fff
+}
+.THIS .forceCalendar .eventList,
+.THIS .forceCalendar .calendarKey,
+.THIS .forceCalendar .calendarDay {
+    height: 1440px
+}
+.THIS .forceCalendar .calendarKey,
+.THIS .forceCalendar .calendarDay {
+    margin-top: 20px
+}
+.THIS .forceCalendar .calendarMonthDayHeaders {
+    padding: 0
+}
+.THIS .forceCalendar.calendarGridView .calendarRow {
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap
+}
+.THIS .forceCalendar.calendarGridView .calendarKey,
+.THIS .forceCalendar.calendarGridView .eventList:before,
+.THIS .forceCalendar .showAllEvents,
+.THIS .forceCalendar.calendarGridView .calendarDayHeaders,
+.THIS .forceCalendar.calendarGridView .calendarTrough {
+    display: none
+}
+.THIS .forceCalendar.calendarGridView .calendarDay {
+    min-height: 100px;
+    position: absolute
+}
+.THIS .forceCalendar.calendarGridView .otherMonthDay {
+    opacity: .3;
+    background: rgb(225, 225, 225)
+}
+.THIS .forceCalendar.calendarGridView .otherMonthDay .eventList,
+.THIS .forceCalendar.calendarGridView .pastDay .eventList {
+    opacity: 1
+}
+.THIS .forceCalendar.calendarGridView .presentDay {
+    border: 2px solid rgb(56, 163, 254);
+    background: none
+}
+.THIS .forceCalendar.calendarGridView h3 {
+    height: 16px;
+    text-align: left
+}
+.THIS .forceCalendar.calendarGridView .eventList {
+    height: auto
+}
+.THIS .forceCalendar.calendarGridView .calendarEvent {
+    display: block;
+    position: static;
+    height: 16px!important;
+    margin: 0 0 1px
+}
+.THIS .forceCalendar.calendarGridView .calendarEvent:nth-child(n+4) {
+    display: none
+}
+.THIS .forceCalendar.calendarGridView .showAllEvents {
+    display: block
+}
+.THIS .forceCalendar .uiDatePicker {
+    display: block!important;
+    z-index: 0;
+    border: none;
+    padding: 10px;
+    box-shadow: none;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto
+}
+.THIS .forceCalendar .verticalStripes {
+    background-image: -webkit-repeating-linear-gradient(0deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, .2) 5px, transparent 0, transparent 10px)!important;
+    background-image: repeating-linear-gradient(90deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, .2) 5px, transparent 0, transparent 10px)!important
+}
+.THIS .forceCalendar .ascDiagonalStripes {
+    background-image: -webkit-repeating-linear-gradient(315deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, .2) 5px, transparent 0, transparent 10px)!important;
+    background-image: repeating-linear-gradient(135deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, .2) 5px, transparent 0, transparent 10px)!important
+}
+.THIS .forceCalendar .descDiagonalStripes {
+    background-image: -webkit-repeating-linear-gradient(45deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, .2) 5px, transparent 0, transparent 10px)!important;
+    background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, .2) 5px, transparent 0, transparent 10px)!important
+}
+@media only screen and (max-width: 1140px) {
+    .THIS .forceCalendar .calendarDayHeader,
+    .THIS .forceCalendar .calendarUserTimezoneOffset {
+        font-size: .75rem
+    }
+}
+@media only screen and (max-width: 950px) {
+    .THIS .forceCalendar .calendarSidebar {
+        display: none
+    }
+    .THIS .forceCalendar .calendar {
+        right: 0
+    }
+}
+
+/* forceCalendarMonthView CSS Rules */
+.THIS .forceCalendarMonthView {
+    height: calc(100% - 40px);
+    border-top: 1px solid rgb(216, 221, 230);
+    border-bottom: 1px solid rgb(216, 221, 230);
+    overflow-y: auto;
+    overflow-y: overlay
+}
+.THIS .forceCalendarMonthView .calendarWeek {
+    border-top: 1px solid rgb(216, 221, 230);
+    width: 100%;
+    position: relative!important
+}
+.THIS .forceCalendarMonthView .calendarWeekList {
+    height: calc(100% - 25px);
+    margin-top: 25px!important;
+    position: relative;
+    padding-left: 0;
+    overflow: hidden
+}
+.THIS .forceCalendarMonthView .calendarWeekBackground {
+    height: 100%;
+    position: absolute;
+    display: table;
+    width: inherit
+}
+.THIS .forceCalendarMonthView .calendarWeekDay {
+    width: 14.28571428571429%;
+    display: table-cell;
+    height: 100%;
+    border-right: 1px solid rgb(216, 221, 230);
+    position: relative
+}
+.THIS .forceCalendarMonthView .calendarWeekDay.today {
+    border: 1px solid rgb(0, 112, 210)
+}
+.THIS .forceCalendarMonthView .calendarWeekDay.neighbor {
+    opacity: .7;
+    background: rgb(238, 241, 246)
+}
+.THIS .forceCalendarMonthView .dayHeader {
+    padding: 5px 0 0 5px;
+    color: rgb(22, 50, 92);
+    font-size: .75rem
+}
+.THIS .forceCalendarMonthView .calendarEvent {
+    position: absolute!important
+}
+.THIS .forceCalendarMonthView .eventData.eventDescription {
+    text-overflow: ellipsis
+}
+.THIS .forceCalendarMonthView .calendarEvent.startsBeforeRange {
+    padding-left: 11px
+}
+.THIS .forceCalendarMonthView .additionalItemsLink {
+    position: absolute;
+    margin-left: 5px;
+    bottom: 0;
+    font-size: .75rem;
+    color: rgb(0, 112, 210);
+    z-index: 1
+}
+
+.THIS .slds-is-selected {
+    background-color: aliceblue;
+}

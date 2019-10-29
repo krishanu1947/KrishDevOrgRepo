@@ -1,0 +1,27 @@
+<apex:page controller="VF2Controller" id="thePage">
+    <apex:dataTable value="{!listAccs}" var="account" id="theTable"
+        rowClasses="odd,even" styleClass="tableClass" border="2">
+        <apex:facet name="caption">table caption</apex:facet>
+        <apex:facet name="header">table header</apex:facet>
+        <apex:facet name="footer">table footer</apex:facet>
+
+        <apex:column >
+            <apex:facet name="header">Name</apex:facet>
+            <apex:facet name="footer">column footer</apex:facet>
+            <apex:outputText value="{!account.name}"/>
+        </apex:column>
+
+        <apex:column >
+            <apex:facet name="header">Website</apex:facet>
+            <apex:facet name="footer">column footer</apex:facet>
+            <apex:outputText value="{!account.website}"/>
+        </apex:column>
+        
+        <apex:column >
+            <apex:facet name="header">Rating</apex:facet>
+            <apex:facet name="footer">column footer</apex:facet>
+            <apex:outputText value="{!account.rating}"/>
+        </apex:column>
+
+    </apex:dataTable>
+</apex:page>

@@ -1,0 +1,16 @@
+<apex:page controller="securityTesting1Con" >
+  
+   <apex:dataList value="{!leads}" var="l" > 
+        <apex:outputText value="{!l.Name}" />-->
+        <apex:outputText value="{!l.Email}"/>-->
+        <apex:outputText value="{!l.Fax}"/>
+       
+    </apex:dataList>
+  <BR/><BR/><BR/>
+  
+  <apex:dataList value="{!leads}" var="x"> 
+        {!x.Name}......{!x.Email}.......{!x.Fax}
+       
+    </apex:dataList>
+  
+</apex:page>

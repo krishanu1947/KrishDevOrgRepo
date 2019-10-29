@@ -1,0 +1,6 @@
+<apex:page controller="AccountCustController">
+  <apex:outputField value="{!acc.Name}"/><BR/>
+  <apex:outputField value="{!acc.website}"/> <BR/>
+  <apex:outputField value="{!acc.rating}"/> <BR/><BR/><BR/><BR/><BR/>
+  {!acc.website}--------{!accsite}
+</apex:page>
